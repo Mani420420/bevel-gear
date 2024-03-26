@@ -107,9 +107,37 @@
 
     <script>
         function calculate() {
-            var z1 = parseFloat(document.getElementById("pinion_teeth").value);
-            var z2 = parseFloat(document.getElementById("gear_teeth").value);
-            var m = parseFloat(document.getElementById("module").value);
+        var pinionTeeth = document.getElementById("pinion_teeth").value.trim();
+        var gearTeeth = document.getElementById("gear_teeth").value.trim();
+        var moduleValue = document.getElementById("module").value.trim();
+    
+        //  for Checking if any of the input fields are empty
+        if (pinionTeeth === "" || gearTeeth === "" || moduleValue === "") {
+            alert("Please enter values in all fields before calculating.");
+            return;
+        }
+    
+        // for Checking if any input value is not a valid number
+        if (isNaN(parseFloat(pinionTeeth)) || isNaN(parseFloat(gearTeeth)) || isNaN(parseFloat(moduleValue))) {
+            alert("Please enter valid numbers.");
+            return;
+        }
+    
+        // for Checking if any input value is less than or equal to zero
+        if (parseFloat(pinionTeeth) <= 0 || parseFloat(gearTeeth) <= 0 || parseFloat(moduleValue) <= 0) {
+            alert("Please enter valid numbers greater than 0.");
+            return;
+        }
+    
+        // for Checking if any input value is negative
+        if (parseFloat(pinionTeeth) < 0 || parseFloat(gearTeeth) < 0 || parseFloat(moduleValue) < 0) {
+            alert("Please enter valid positive numbers.");
+            return;
+        }
+    
+        var z1 = parseFloat(pinionTeeth);
+        var z2 = parseFloat(gearTeeth);
+        var m = parseFloat(moduleValue);
 
             var gear_ratio = z2 / z1;
             var gear_pitch_circle_diameter = m * z2;
